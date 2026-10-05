@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veronica | Full-Stack Developer Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for professional icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        darkBg: '#070913',
+                        cardBg: 'rgba(30, 41, 59, 0.6)',
+                        accentCyan: '#38bdf8',
+                        accentPurple: '#a855f7',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #070913;
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Ambient background lighting orbs */
+        .ambient-glow-1 {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: rgba(56, 189, 248, 0.12);
+            filter: blur(140px);
+            z-index: -1;
+            top: 5%;
+            left: 5%;
+            pointer-events: none;
+        }
+
+        .ambient-glow-2 {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: rgba(168, 85, 247, 0.12);
+            filter: blur(140px);
+            z-index: -1;
+            top: 40%;
+            right: 5%;
+            pointer-events: none;
+        }
+
+        .ambient-glow-3 {
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            background: rgba(14, 165, 233, 0.1);
+            filter: blur(140px);
+            z-index: -1;
+            bottom: 10%;
+            left: 20%;
+            pointer-events: none;
+        }
+
+        /* Glassmorphism card utilities */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.3);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #070913;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #38bdf8;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen overflow-x-hidden">
+
+    <!-- Ambient Lighting Elements -->
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+    <div class="ambient-glow-3"></div>
+
+    <header class="fixed top-0 left-0 w-full z-50 bg-[#070913]/80 backdrop-blur-xl border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#home" class="text-2xl font-black tracking-tight text-white flex items-center gap-1">
+                Veronica<span class="text-accentCyan drop-shadow-[0_0_12px_rgba(56,189,248,0.6)]">.</span>
+            </a>
+            
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 font-medium text-slate-300">
+                <a href="#about" class="hover:text-accentCyan transition-colors">About</a>
+                <a href="#skills" class="hover:text-accentCyan transition-colors">Skills</a>
+                <a href="#projects" class="hover:text-accentCyan transition-colors">Projects</a>
+                <a href="#contact" class="hover:text-accentCyan transition-colors">Contact</a>
+                <a href="#contact" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-accentCyan to-blue-600 text-darkBg font-semibold shadow-[0_0_20px_rgba(56,189,248,0.4)] hover:shadow-[0_0_25px_rgba(56,189,248,0.7)] transition-all transform hover:-translate-y-0.5">
+                    Let's Talk
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden text-slate-300 hover:text-white text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#070913]/95 backdrop-blur-2xl border-b border-white/10 px-6 py-5 space-y-4">
+            <a href="#about" class="block text-slate-300 hover:text-accentCyan font-medium mobile-link">About</a>
+            <a href="#skills" class="block text-slate-300 hover:text-accentCyan font-medium mobile-link">Skills</a>
+            <a href="#projects" class="block text-slate-300 hover:text-accentCyan font-medium mobile-link">Projects</a>
+            <a href="#contact" class="block text-slate-300 hover:text-accentCyan font-medium mobile-link">Contact</a>
+            <a href="#contact" class="block text-center w-full py-3 rounded-full bg-gradient-to-r from-accentCyan to-blue-600 text-darkBg font-semibold shadow-lg">
+                Let's Talk
+            </a>
+        </div>
+    </header>
+
+    <section id="home" class="min-h-screen flex items-center pt-28 pb-16 px-6">
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 space-y-6">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accentCyan/10 border border-accentCyan/20 text-accentCyan text-sm font-semibold tracking-wide animate-pulse">
+                    <span class="w-2 h-2 rounded-full bg-accentCyan"></span> Full-Stack Developer & Problem Solver
+                </div>
+                
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.1]">
+                    Hi, I'm <span class="bg-gradient-to-r from-accentCyan via-sky-300 to-accentPurple bg-clip-text text-transparent">Veronica</span>
+                </h1>
+                
+                <p class="text-lg sm:text-xl text-slate-400 max-w-2xl leading-relaxed">
+                    I craft robust, scalable full-stack web applications and immersive digital experiences. Specializing in sleek user interfaces and rock-solid backend logic.
+                </p>
+                
+                <div class="flex flex-wrap gap-4 pt-4">
+                    <a href="#projects" class="px-8 py-4 rounded-full bg-gradient-to-r from-accentCyan to-blue-600 text-darkBg font-bold shadow-[0_0_25px_rgba(56,189,248,0.4)] hover:shadow-[0_0_35px_rgba(56,189,248,0.7)] transition-all transform hover:-translate-y-1 flex items-center gap-3">
+                        <span>Explore Projects</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#contact" class="px-8 py-4 rounded-full glass-card text-white font-semibold hover:border-accentCyan/50 transition-all transform hover:-translate-y-1 flex items-center gap-2">
+                        <i class="fas fa-paper-plane text-accentCyan"></i> Get in Touch
+                    </a>
+                </div>
+
+                <div class="flex items-center gap-6 pt-6 text-slate-400">
+                    <span class="text-sm font-medium uppercase tracking-wider">Connect:</span>
+                    <a href="https://github.com" target="_blank" class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:text-accentCyan hover:border-accentCyan transition-all"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com" target="_blank" class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:text-accentCyan hover:border-accentCyan transition-all"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:veronica@example.com" class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:text-accentCyan hover:border-accentCyan transition-all"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+
+            <!-- Hero Visual Badge / Floating Card Component -->
+            <div class="lg:col-span-5 relative flex justify-center">
+                <div class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-accentCyan to-accentPurple opacity-30 blur-xl"></div>
+                <div class="relative glass-card p-8 rounded-3xl w-full max-w-md space-y-6 shadow-2xl">
+                    <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                        </div>
+                        <span class="text-xs font-mono text-slate-400">veronica_stack.php</span>
+                    </div>
+                    <div class="space-y-3 font-mono text-sm text-slate-300">
+                        <p><span class="text-accentPurple">class</span> <span class="text-accentCyan">Developer</span> {</p>
+                        <p class="pl-4"><span class="text-blue-400">public</span> string $name = <span class="text-emerald-300">'Veronica'</span>;</p>
+                        <p class="pl-4"><span class="text-blue-400">public</span> array $stack = [<span class="text-emerald-300">'HTML/CSS'</span>, <span class="text-emerald-300">'JS'</span>, <span class="text-emerald-300">'PHP'</span>, <span class="text-emerald-300">'MySQL'</span>];</p>
+                        <p class="pl-4"><span class="text-blue-400">public</span> bool $passionForCode = <span class="text-purple-400">true</span>;</p>
+                        <p class="pl-4"><span class="text-purple-400">public function</span> <span class="text-yellow-300">buildFuture</span>() {</p>
+                        <p class="pl-8"><span class="text-blue-400">return</span> <span class="text-emerald-300">'High-Impact Web Apps'</span>;</p>
+                        <p class="pl-4">}</p>
+                        <p>}</p>
+                    </div>
+                    <div class="pt-2 flex items-center justify-between text-xs text-slate-400 border-t border-white/10 pt-4">
+                        <span class="flex items-center gap-1.5"><i class="fas fa-circle text-emerald-400 text-[8px] animate-ping"></i> Status: Available for hire</span>
+                        <span class="font-mono text-accentCyan">v2.6.4</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 px-6 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <h2 class="text-xs uppercase font-bold tracking-widest text-accentCyan">Get to know me</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Architecting Digital Excellence</h3>
+                <p class="text-slate-400 text-lg">Combining clean frontend design principles with robust relational databases and backend architectures.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-3xl space-y-4">
+                    <div class="w-14 h-14 rounded-2xl bg-accentCyan/10 border border-accentCyan/30 flex items-center justify-center text-accentCyan text-2xl">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white">Frontend Mastery</h4>
+                    <p class="text-slate-400 leading-relaxed">Building responsive, accessible, and ultra-smooth user interfaces using modern HTML5, CSS3, JavaScript, and Tailwind CSS.</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-3xl space-y-4">
+                    <div class="w-14 h-14 rounded-2xl bg-accentPurple/10 border border-accentPurple/30 flex items-center justify-center text-accentPurple text-2xl">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white">Backend & Database</h4>
+                    <p class="text-slate-400 leading-relaxed">Developing powerful server-side scripts with PHP, managing secure database operations with MySQL, and testing locally via XAMPP.</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-3xl space-y-4">
+                    <div class="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-2xl">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white">End-to-End Solutions</h4>
+                    <p class="text-slate-400 leading-relaxed">Translating complex business requirements into fully functional web prototypes, e-commerce concepts, and management dashboards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-24 px-6 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <h2 class="text-xs uppercase font-bold tracking-widest text-accentCyan">Expertise</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Core Technologies & Tools</h3>
+                <p class="text-slate-400 text-lg">The stack I use to bring digital visions to life.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Skill 1 -->
+                <div class="glass-card p-6 rounded-2xl flex items-center gap-5">
+                    <div class="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-400 text-2xl flex-shrink-0">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <div class="flex-grow space-y-2">
+                        <div class="flex justify-between font-semibold text-sm">
+                            <span class="text-white">HTML5 & CSS3</span>
+                            <span class="text-accentCyan">95%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-orange-500 to-amber-400 h-full rounded-full" style="width: 95%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill 2 -->
+                <div class="glass-card p-6 rounded-2xl flex items-center gap-5">
+                    <div class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-yellow-400 text-2xl flex-shrink-0">
+                        <i class="fab fa-js"></i>
+                    </div>
+                    <div class="flex-grow space-y-2">
+                        <div class="flex justify-between font-semibold text-sm">
+                            <span class="text-white">JavaScript (ES6+)</span>
+                            <span class="text-accentCyan">90%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-yellow-500 to-amber-300 h-full rounded-full" style="width: 90%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill 3 -->
+                <div class="glass-card p-6 rounded-2xl flex items-center gap-5">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-2xl flex-shrink-0">
+                        <i class="fab fa-php"></i>
+                    </div>
+                    <div class="flex-grow space-y-2">
+                        <div class="flex justify-between font-semibold text-sm">
+                            <span class="text-white">PHP Backend</span>
+                            <span class="text-accentCyan">88%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-indigo-500 to-purple-500 h-full rounded-full" style="width: 88%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill 4 -->
+                <div class="glass-card p-6 rounded-2xl flex items-center gap-5">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-2xl flex-shrink-0">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="flex-grow space-y-2">
+                        <div class="flex justify-between font-semibold text-sm">
+                            <span class="text-white">MySQL & Databases</span>
+                            <span class="text-accentCyan">85%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-cyan-500 to-blue-500 h-full rounded-full" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill 5 -->
+                <div class="glass-card p-6 rounded-2xl flex items-center gap-5">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl flex-shrink-0">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="flex-grow space-y-2">
+                        <div class="flex justify-between font-semibold text-sm">
+                            <span class="text-white">XAMPP & Local Server</span>
+                            <span class="text-accentCyan">92%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-purple-500 to-pink-500 h-full rounded-full" style="width: 92%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill 6 -->
+                <div class="glass-card p-6 rounded-2xl flex items-center gap-5">
+                    <div class="w-12 h-12 rounded-xl bg-teal-500/10 border border-teal-500/30 flex items-center justify-center text-teal-400 text-2xl flex-shrink-0">
+                        <i class="fab fa-git-alt"></i>
+                    </div>
+                    <div class="flex-grow space-y-2">
+                        <div class="flex justify-between font-semibold text-sm">
+                            <span class="text-white">Git & Version Control</span>
+                            <span class="text-accentCyan">86%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-teal-500 to-emerald-400 h-full rounded-full" style="width: 86%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-24 px-6 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-12">
+                <h2 class="text-xs uppercase font-bold tracking-widest text-accentCyan">Portfolio</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Featured Projects</h3>
+                <p class="text-slate-400 text-lg">Explore some of my recent full-stack applications and prototypes.</p>
+            </div>
+
+            <!-- Project Filters -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12" id="filter-container">
+                <button class="filter-btn px-6 py-2 rounded-full text-sm font-semibold transition-all bg-accentCyan text-darkBg shadow-[0_0_15px_rgba(56,189,248,0.4)]" data-filter="all">All Projects</button>
+                <button class="filter-btn px-6 py-2 rounded-full text-sm font-semibold transition-all glass-card text-slate-300 hover:text-white" data-filter="fullstack">Full-Stack Systems</button>
+                <button class="filter-btn px-6 py-2 rounded-full text-sm font-semibold transition-all glass-card text-slate-300 hover:text-white" data-filter="dashboard">Dashboards & Analytics</button>
+                <button class="filter-btn px-6 py-2 rounded-full text-sm font-semibold transition-all glass-card text-slate-300 hover:text-white" data-filter="business">Business Prototypes</button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+                
+                <!-- Project 1: Campus Pro -->
+                <div class="project-card glass-card rounded-3xl overflow-hidden flex flex-col justify-between" data-category="fullstack">
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-accentCyan/10 border border-accentCyan/20 text-accentCyan text-xs font-semibold">Full-Stack</span>
+                            <span class="text-xs font-mono text-slate-400"><i class="fas fa-calendar-alt mr-1"></i> 2026</span>
+                        </div>
+                        <h4 class="text-2xl font-bold text-white">Campus Pro Hostel System</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            A comprehensive hostel management system featuring real-time room occupancy grids, M-Pesa payment integration, student onboarding, and digital clearance workflows.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">PHP</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">MySQL</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-2 border-t border-white/10 flex items-center justify-between">
+                        <button onclick="openProjectModal('Campus Pro Hostel System', 'A comprehensive hostel management system featuring room occupancy grids, secure M-Pesa payment integration, student onboarding workflows, and automated digital clearance.', ['PHP', 'MySQL', 'JavaScript', 'Tailwind CSS'], 'https://github.com', '#')" class="text-accentCyan hover:underline font-semibold text-sm flex items-center gap-1.5">
+                            <span>View Details</span> <i class="fas fa-arrow-right text-xs"></i>
+                        </button>
+                        <a href="https://github.com" target="_blank" class="w-9 h-9 rounded-full glass-card flex items-center justify-center text-slate-300 hover:text-accentCyan hover:border-accentCyan transition-all"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 2: Cre8Flow Dashboard -->
+                <div class="project-card glass-card rounded-3xl overflow-hidden flex flex-col justify-between" data-category="dashboard">
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-accentPurple/10 border border-accentPurple/20 text-accentPurple text-xs font-semibold">Dashboard</span>
+                            <span class="text-xs font-mono text-slate-400"><i class="fas fa-calendar-alt mr-1"></i> 2026</span>
+                        </div>
+                        <h4 class="text-2xl font-bold text-white">Cre8Flow Analytics Dashboard</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            A high-performance metrics dashboard and visual analytics display featuring interactive data graphs, user activity monitoring, and customizable widget grids.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">JavaScript</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">Chart.js</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">Tailwind CSS</span>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-2 border-t border-white/10 flex items-center justify-between">
+                        <button onclick="openProjectModal('Cre8Flow Analytics Dashboard', 'A high-performance metrics dashboard and visual analytics display featuring interactive data graphs, user activity monitoring, and customizable widget grids.', ['JavaScript', 'Chart.js', 'Tailwind CSS'], 'https://github.com', '#')" class="text-accentCyan hover:underline font-semibold text-sm flex items-center gap-1.5">
+                            <span>View Details</span> <i class="fas fa-arrow-right text-xs"></i>
+                        </button>
+                        <a href="https://github.com" target="_blank" class="w-9 h-9 rounded-full glass-card flex items-center justify-center text-slate-300 hover:text-accentCyan hover:border-accentCyan transition-all"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 3: Urban Furnitures Prototypes -->
+                <div class="project-card glass-card rounded-3xl overflow-hidden flex flex-col justify-between" data-category="business">
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">Business E-Commerce</span>
+                            <span class="text-xs font-mono text-slate-400"><i class="fas fa-calendar-alt mr-1"></i> 2025</span>
+                        </div>
+                        <h4 class="text-2xl font-bold text-white">Urban Furnitures Concept</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            A sleek e-commerce prototype for a local furniture showroom featuring product filtering, interactive cart simulation, and modern aesthetic product cards.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">HTML5/CSS3</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">JavaScript</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">PHP</span>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-2 border-t border-white/10 flex items-center justify-between">
+                        <button onclick="openProjectModal('Urban Furnitures Concept', 'A sleek e-commerce prototype for a local furniture showroom featuring product filtering, interactive cart simulation, and modern aesthetic product cards.', ['HTML5', 'CSS3', 'JavaScript', 'PHP'], 'https://github.com', '#')" class="text-accentCyan hover:underline font-semibold text-sm flex items-center gap-1.5">
+                            <span>View Details</span> <i class="fas fa-arrow-right text-xs"></i>
+                        </button>
+                        <a href="https://github.com" target="_blank" class="w-9 h-9 rounded-full glass-card flex items-center justify-center text-slate-300 hover:text-accentCyan hover:border-accentCyan transition-all"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 4: Clean Wave Laundry -->
+                <div class="project-card glass-card rounded-3xl overflow-hidden flex flex-col justify-between" data-category="business">
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">Business Prototype</span>
+                            <span class="text-xs font-mono text-slate-400"><i class="fas fa-calendar-alt mr-1"></i> 2025</span>
+                        </div>
+                        <h4 class="text-2xl font-bold text-white">Clean Wave Laundry Web App</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            An online laundry booking and pickup scheduling platform designed for local service providers, complete with order tracking and customer management.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">PHP</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">MySQL</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">Tailwind</span>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-2 border-t border-white/10 flex items-center justify-between">
+                        <button onclick="openProjectModal('Clean Wave Laundry Web App', 'An online laundry booking and pickup scheduling platform designed for local service providers, complete with order tracking and customer management.', ['PHP', 'MySQL', 'Tailwind CSS'], 'https://github.com', '#')" class="text-accentCyan hover:underline font-semibold text-sm flex items-center gap-1.5">
+                            <span>View Details</span> <i class="fas fa-arrow-right text-xs"></i>
+                        </button>
+                        <a href="https://github.com" target="_blank" class="w-9 h-9 rounded-full glass-card flex items-center justify-center text-slate-300 hover:text-accentCyan hover:border-accentCyan transition-all"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 5: KDG Imports Portal -->
+                <div class="project-card glass-card rounded-3xl overflow-hidden flex flex-col justify-between" data-category="business">
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">Business Portal</span>
+                            <span class="text-xs font-mono text-slate-400"><i class="fas fa-calendar-alt mr-1"></i> 2025</span>
+                        </div>
+                        <h4 class="text-2xl font-bold text-white">KDG Imports Catalog</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            A custom inventory and quotation portal for an import-export business, allowing clients to browse catalog items and submit direct inquiries.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">JavaScript</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">PHP</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">MySQL</span>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-2 border-t border-white/10 flex items-center justify-between">
+                        <button onclick="openProjectModal('KDG Imports Catalog', 'A custom inventory and quotation portal for an import-export business, allowing clients to browse catalog items and submit direct inquiries.', ['JavaScript', 'PHP', 'MySQL'], 'https://github.com', '#')" class="text-accentCyan hover:underline font-semibold text-sm flex items-center gap-1.5">
+                            <span>View Details</span> <i class="fas fa-arrow-right text-xs"></i>
+                        </button>
+                        <a href="https://github.com" target="_blank" class="w-9 h-9 rounded-full glass-card flex items-center justify-center text-slate-300 hover:text-accentCyan hover:border-accentCyan transition-all"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 6: Task Flow Pro -->
+                <div class="project-card glass-card rounded-3xl overflow-hidden flex flex-col justify-between" data-category="dashboard">
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-accentPurple/10 border border-accentPurple/20 text-accentPurple text-xs font-semibold">Dashboard</span>
+                            <span class="text-xs font-mono text-slate-400"><i class="fas fa-calendar-alt mr-1"></i> 2026</span>
+                        </div>
+                        <h4 class="text-2xl font-bold text-white">Task Flow Pro Manager</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            An intuitive project and task assignment board featuring drag-and-drop status columns, team member management, and priority tagging.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">JavaScript</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">Tailwind</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">HTML5</span>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-2 border-t border-white/10 flex items-center justify-between">
+                        <button onclick="openProjectModal('Task Flow Pro Manager', 'An intuitive project and task assignment board featuring drag-and-drop status columns, team member management, and priority tagging.', ['JavaScript', 'Tailwind CSS', 'HTML5'], 'https://github.com', '#')" class="text-accentCyan hover:underline font-semibold text-sm flex items-center gap-1.5">
+                            <span>View Details</span> <i class="fas fa-arrow-right text-xs"></i>
+                        </button>
+                        <a href="https://github.com" target="_blank" class="w-9 h-9 rounded-full glass-card flex items-center justify-center text-slate-300 hover:text-accentCyan hover:border-accentCyan transition-all"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 px-6 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <h2 class="text-xs uppercase font-bold tracking-widest text-accentCyan">Get in touch</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Let's Build Something Amazing Together</h3>
+                <p class="text-slate-400 text-lg">Have a project in mind or want to discuss potential collaborations? Drop me a message below.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <!-- Contact Info Cards -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="glass-card p-6 rounded-2xl flex items-center gap-5">
+                        <div class="w-12 h-12 rounded-xl bg-accentCyan/10 border border-accentCyan/30 flex items-center justify-center text-accentCyan text-xl flex-shrink-0">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 font-medium">Direct Email</p>
+                            <a href="mailto:muhembiveronica@gmail.com" class="text-white font-semibold hover:text-accentCyan transition-colors">muhembiveronica@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl flex items-center gap-5">
+                        <div class="w-12 h-12 rounded-xl bg-accentPurple/10 border border-accentPurple/30 flex items-center justify-center text-accentPurple text-xl flex-shrink-0">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 font-medium">Phone / WhatsApp</p>
+                            <a href="tel:+254708718736" class="text-white font-semibold hover:text-accentCyan transition-colors">+254 708718736</a>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl flex items-center gap-5">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl flex-shrink-0">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 font-medium">Location</p>
+                            <p class="text-white font-semibold">Nairobi, Kenya (Available Worldwide)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Contact Form -->
+                <div class="lg:col-span-7">
+                    <form id="contact-form" class="glass-card p-8 sm:p-10 rounded-3xl space-y-6 shadow-2xl relative">
+                        <div id="form-success-banner" class="hidden p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm font-medium flex items-center gap-3">
+                            <i class="fas fa-check-circle text-lg"></i>
+                            <span>Thank you! Your message has been sent successfully. Veronica will get back to you soon.</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label for="name" class="text-xs font-semibold uppercase tracking-wider text-slate-300">Your Name</label>
+                                <input type="text" id="name" required class="w-full bg-[#070913]/60 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-accentCyan transition-colors" placeholder="John Doe">
+                            </div>
+                            <div class="space-y-2">
+                                <label for="email" class="text-xs font-semibold uppercase tracking-wider text-slate-300">Your Email</label>
+                                <input type="email" id="email" required class="w-full bg-[#070913]/60 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-accentCyan transition-colors" placeholder="john@example.com">
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="subject" class="text-xs font-semibold uppercase tracking-wider text-slate-300">Subject</label>
+                            <input type="text" id="subject" required class="w-full bg-[#070913]/60 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-accentCyan transition-colors" placeholder="Project Inquiry / Collaboration">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="message" class="text-xs font-semibold uppercase tracking-wider text-slate-300">Message</label>
+                            <textarea id="message" rows="5" required class="w-full bg-[#070913]/60 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-accentCyan transition-colors resize-none" placeholder="Tell me about your project..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-accentCyan to-blue-600 text-darkBg font-bold shadow-[0_0_20px_rgba(56,189,248,0.4)] hover:shadow-[0_0_30px_rgba(56,189,248,0.7)] transition-all flex items-center justify-center gap-2">
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-white/10 py-12 px-6 bg-[#04050a]">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="text-center sm:text-left">
+                <a href="#home" class="text-xl font-black text-white">Veronica<span class="text-accentCyan">.</span></a>
+                <p class="text-xs text-slate-500 mt-1">Full-Stack Web Developer & Engineer</p>
+            </div>
+            <p class="text-xs text-slate-500 text-center">© 2026 Veronica. All rights reserved. Built with passion & modern web tech.</p>
+            <div class="flex items-center gap-4 text-slate-400">
+                <a href="https://github.com" target="_blank" class="hover:text-accentCyan transition-colors"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com" target="_blank" class="hover:text-accentCyan transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:veronica@example.com" class="hover:text-accentCyan transition-colors"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Project Detail Modal -->
+    <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+        <div class="glass-card max-w-xl w-full p-8 rounded-3xl relative space-y-6 border border-accentCyan/30 shadow-2xl animate-in fade-in zoom-in duration-200">
+            <button onclick="closeProjectModal()" class="absolute top-6 right-6 w-9 h-9 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-slate-300 hover:text-white transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="space-y-2">
+                <span class="text-xs font-mono text-accentCyan uppercase tracking-wider">Project Specification</span>
+                <h3 id="modal-title" class="text-2xl font-bold text-white">Project Title</h3>
+            </div>
+            <p id="modal-desc" class="text-slate-300 text-sm leading-relaxed">
+                Project description goes here...
+            </p>
+            <div class="space-y-2">
+                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Technologies Used:</p>
+                <div id="modal-tech" class="flex flex-wrap gap-2">
+                    <!-- Tech tags injected by JS -->
+                </div>
+            </div>
+            <div class="pt-4 border-t border-white/10 flex items-center justify-end gap-4">
+                <button onclick="closeProjectModal()" class="px-6 py-2.5 rounded-xl glass-card text-slate-300 hover:text-white font-medium text-sm transition-colors">Close</button>
+                <a id="modal-github" href="#" target="_blank" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-accentCyan to-blue-600 text-darkBg font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center gap-2">
+                    <i class="fab fa-github"></i> View Repository
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Navigation Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Project Filtering Logic
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active styling from all buttons
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-accentCyan', 'text-darkBg', 'shadow-[0_0_15px_rgba(56,189,248,0.4)]');
+                    b.classList.add('glass-card', 'text-slate-300');
+                });
+                
+                // Add active styling to clicked button
+                btn.classList.remove('glass-card', 'text-slate-300');
+                btn.classList.add('bg-accentCyan', 'text-darkBg', 'shadow-[0_0_15px_rgba(56,189,248,0.4)]');
+
+                const filter = btn.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Project Modal Logic
+        const modal = document.getElementById('project-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
+        const modalTech = document.getElementById('modal-tech');
+        const modalGithub = document.getElementById('modal-github');
+
+        function openProjectModal(title, desc, techArray, githubUrl, liveUrl) {
+            modalTitle.textContent = title;
+            modalDesc.textContent = desc;
+            modalGithub.href = githubUrl;
+            
+            modalTech.innerHTML = '';
+            techArray.forEach(tech => {
+                const span = document.createElement('span');
+                span.className = 'px-3 py-1 rounded-md bg-slate-800 text-accentCyan text-xs font-mono border border-accentCyan/20';
+                span.textContent = tech;
+                modalTech.appendChild(span);
+            });
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeProjectModal() {
+            modal.classList.add('hidden');
+        }
+
+        // Close modal on outside click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeProjectModal();
+            }
+        });
+
+        // Contact Form Mockup Submission Handler
+        const contactForm = document.getElementById('contact-form');
+        const successBanner = document.getElementById('form-success-banner');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Show success banner
+            successBanner.classList.remove('hidden');
+            
+            // Reset form fields
+            contactForm.reset();
+
+            // Hide success banner after 6 seconds
+            setTimeout(() => {
+                successBanner.classList.add('hidden');
+            }, 6000);
+        });
+    </script>
+</body>
+</html>
